@@ -1,2 +1,4 @@
 # yclite
-hacker news lite
+hacker news lite web project using gin
+
+## install
