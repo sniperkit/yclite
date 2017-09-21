@@ -1,10 +1,10 @@
-package routers
+package router
 
 import (
-	"github.com/shohi/yclite/controllers"
 	"github.com/astaxie/beego"
+	"github.com/shohi/yclite/controller"
 )
 
 func init() {
-    beego.Router("/", &controllers.MainController{})
+	beego.Router("/", &controllers.MainController{})
 }

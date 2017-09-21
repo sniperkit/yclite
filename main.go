@@ -1,11 +1,10 @@
 package main
 
 import (
-	_ "github.com/shohi/yclite/routers"
 	"github.com/astaxie/beego"
+	_ "github.com/shohi/yclite/router"
 )
 
 func main() {
 	beego.Run()
 }
-
