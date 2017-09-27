@@ -1,10 +1,12 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
-	_ "github.com/shohi/yclite/router"
+	"log"
+
+	"github.com/shohi/yclite/router"
+	"github.com/valyala/fasthttp"
 )
 
 func main() {
-	beego.Run()
+	log.Fatal(fasthttp.ListenAndServe(":8080", router.Router.Handler))
 }

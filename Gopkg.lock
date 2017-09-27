@@ -2,10 +2,10 @@
 
 
 [[projects]]
-  name = "github.com/astaxie/beego"
-  packages = [".","config","context","context/param","grace","logs","session","toolbox","utils"]
-  revision = "d96289a81bf67728cff7a19b067aaecc65a62ec6"
-  version = "v1.9.0"
+  name = "github.com/buaazp/fasthttprouter"
+  packages = ["."]
+  revision = "ade4e2031af3aed7fffd241084aad80a58faf421"
+  version = "v0.1.1"
 
 [[projects]]
   branch = "master"
@@ -20,6 +20,24 @@
   version = "v4.2.1"
 
 [[projects]]
+  name = "github.com/klauspost/compress"
+  packages = ["flate","gzip","zlib"]
+  revision = "6c8db69c4b49dd4df1fff66996cf556176d0b9bf"
+  version = "v1.2.1"
+
+[[projects]]
+  name = "github.com/klauspost/cpuid"
+  packages = ["."]
+  revision = "ae7887de9fa5d2db4eaa8174a7eff2c1ac00f2da"
+  version = "v1.1"
+
+[[projects]]
+  name = "github.com/klauspost/crc32"
+  packages = ["."]
+  revision = "cb6bfca970f6908083f26f39a79009d608efd5cd"
+  version = "v1.1"
+
+[[projects]]
   name = "github.com/smartystreets/assertions"
   packages = [".","internal/go-render/render","internal/oglematchers"]
   revision = "9c0ea8acbc1d8ad689f9e6fe0c1fa5838e0cabc2"
@@ -31,9 +49,15 @@
   revision = "9e8dc3f972df6c8fcc0375ef492c24d0bb204857"
   version = "1.6.3"
 
+[[projects]]
+  name = "github.com/valyala/fasthttp"
+  packages = [".","fasthttputil"]
+  revision = "d42167fd04f636e20b005e9934159e95454233c7"
+  version = "v20160617"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8cdfe9e73a65183a61d63afed2105339e4dfb25ded8afa3cbf744188ddb4e0e6"
+  inputs-digest = "5ddfe60758a3e4f3d816eb702619f5706d9cb23ce8b2c6d183b2009c6014975f"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -20,11 +20,3 @@
 #  name = "github.com/x/y"
 #  version = "2.4.0"
 
-
-[[constraint]]
-  name = "github.com/astaxie/beego"
-  version = "1.9.0"
-
-[[constraint]]
-  name = "github.com/smartystreets/goconvey"
-  version = "1.6.3"
