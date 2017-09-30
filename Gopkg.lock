@@ -2,6 +2,18 @@
 
 
 [[projects]]
+  name = "github.com/PuerkitoBio/goquery"
+  packages = ["."]
+  revision = "e1271ee34c6a305e38566ecd27ae374944907ee9"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/andybalholm/cascadia"
+  packages = ["."]
+  revision = "349dd0209470eabd9514242c688c403c0926d266"
+
+[[projects]]
   name = "github.com/buaazp/fasthttprouter"
   packages = ["."]
   revision = "ade4e2031af3aed7fffd241084aad80a58faf421"
@@ -55,9 +67,15 @@
   revision = "d42167fd04f636e20b005e9934159e95454233c7"
   version = "v20160617"
 
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = ["html","html/atom"]
+  revision = "0a9397675ba34b2845f758fe3cd68828369c6517"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "5ddfe60758a3e4f3d816eb702619f5706d9cb23ce8b2c6d183b2009c6014975f"
+  inputs-digest = "d83efce24abde72c40376175c1fa283bc8c382f1ebca2b649bafa61064fa1c23"
   solver-name = "gps-cdcl"
   solver-version = 1

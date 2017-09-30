@@ -7,7 +7,7 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-// Router is main router
+// Router is the main router
 var Router = fasthttprouter.New()
 
 func init() {
@@ -21,5 +21,6 @@ func index(ctx *fasthttp.RequestCtx) {
 
 func list(ctx *fasthttp.RequestCtx) {
 	path := ctx.UserValue("path")
+
 	fmt.Fprintf(ctx, "path ==> %v, %T\n", path, path)
 }
