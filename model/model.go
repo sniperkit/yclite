@@ -2,12 +2,16 @@ package model
 
 // HackerNews represent on record
 type HackerNews struct {
-	Title    []byte
+	Id 		string
+	Title    string
 	Points   int
 	Comments int
-	Author   []byte
-	Link     []byte
-	Domain   []byte
-	Discuss  []byte
-	Time     []byte
+	Author   string
+	Link     string
+	Domain   string
+	Discuss  string
+	Time     string
 }
+
+var BaseUrl = "https://news.ycombinator.com/news?p="
+var DiscussUrl = "https://news.ycombinator.com/item?id="

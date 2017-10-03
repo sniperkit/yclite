@@ -13,10 +13,11 @@ func TestExtractInt(t *testing.T) {
 		want  []int
 	}{
 		{"aa", nil},
+		{"123, 456", []int{123, 456}},
 	}
 
 	for _, c := range cases {
-		got := ExtractInt(c.input)
+		got := ExtractInts(c.input)
 
 		if len(got) == 0 && len(c.want) == 0 {
 			continue
@@ -40,4 +41,10 @@ func TestLenOnNil(t *testing.T) {
 		fmt.Println("slice init with nil")
 		fmt.Printf("len of nil slice returns %d\n", len(arr))
 	}
+}
+
+
+func TestExtractHackerNews(t *testing.T) {
+	p := 1
+	fmt.Println(ExtractHackerNews(p))
 }
