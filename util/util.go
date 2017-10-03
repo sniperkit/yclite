@@ -1,7 +1,6 @@
 package util
 
 import (
-	"fmt"
 	"regexp"
 	"strconv"
 	. "github.com/shohi/yclite/model"
@@ -41,7 +40,6 @@ func ExtractHackerNews(p int) []HackerNews {
 	//
 	ms := "#hnmain tr td table.itemlist tbody"
 	doc.Find(ms + " tr.athing").Each(func(i int, s *goquery.Selection) {
-		fmt.Printf("#######################  %d  #######################\n", i)
 		ns := s.NextUntil(ms + " tr.spacer")
 		hack := HackerNews{}
 		
