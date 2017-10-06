@@ -49,6 +49,8 @@ func ExtractHackerNews(p int) HackerNewsSlice {
 		
 
 		hack.Id = id
+		hack.Page = p
+		hack.Sequence = i
 		hack.Link = link
 		hack.Discuss = DiscussUrl + id
 		hack.Title = sls.Text()

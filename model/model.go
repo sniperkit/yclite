@@ -9,6 +9,8 @@ type HackerNews struct {
 	Title    string
 	Points   int
 	Comments int
+	Sequence	int
+	Page 	int
 	Author   string
 	Link     string
 	Domain   string

@@ -12,9 +12,18 @@
 <body>
     <ul>
         {{ range . }}
-        <li><a href="{{.Link}}" target="_new"> {{ .Title }} </a><span>{{ .Comments }}</span></li>
+        <li>
+            <a href="{{.Link}}" target="_new"> {{ .Title }} </a>
+            <a href="{{.Discuss}}" target="_new">{{ .Comments }}</a>
+        </li>
         {{ else }}
         <li> Nothing to show. </li>
         {{ end }}
     </ul>
+    {{ range $index, $value := . }}
+        {{ if ($index | equal 0) }}
+        <input type="button" name="prev" value="prev" onclick="location.href='/list/{{ $value.Page | add -1 }}'">
+        <input type="button" name="next" value="next" onclick="location.href='/list/{{ $value.Page | add 1 }}'"> 
+        {{ end }}
+    {{ end }}
 </body>
