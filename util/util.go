@@ -28,14 +28,14 @@ func ExtractInts(s string) []int {
 	return ret
 }
 
-func ExtractHackerNews(p int) []HackerNews {
+func ExtractHackerNews(p int) HackerNewsSlice {
 	doc, err := goquery.NewDocument(BaseUrl + strconv.Itoa(p))
 	
 	if err != nil {
 		return nil
 	}
 
-	var hn []HackerNews
+	var hn HackerNewsSlice
 
 	//
 	ms := "#hnmain tr td table.itemlist tbody"
