@@ -5,12 +5,12 @@ var DiscussUrl = "https://news.ycombinator.com/item?id="
 
 // HackerNews represent one record
 type HackerNews struct {
-	Id 		string
+	Id       string
 	Title    string
 	Points   int
 	Comments int
-	Sequence	int
-	Page 	int
+	Sequence int
+	Page     int
 	Author   string
 	Link     string
 	Domain   string
@@ -31,5 +31,3 @@ func (p HackerNewsSlice) Less(i, j int) bool {
 func (p HackerNewsSlice) Swap(i, j int) {
 	p[i], p[j] = p[j], p[i]
 }
-
-

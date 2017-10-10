@@ -3,8 +3,9 @@ package util
 import (
 	"regexp"
 	"strconv"
-	. "github.com/shohi/yclite/model"
+
 	"github.com/PuerkitoBio/goquery"
+	"github.com/shohi/yclite/model"
 )
 
 var defaultSize = 64
@@ -20,7 +21,7 @@ func ExtractInts(s string) []int {
 		for _, m := range v {
 			tmp, err := strconv.Atoi(m)
 			if err == nil {
-				ret = append(ret, tmp)	
+				ret = append(ret, tmp)
 			}
 		}
 	}
@@ -29,30 +30,29 @@ func ExtractInts(s string) []int {
 }
 
 func ExtractHackerNews(p int) HackerNewsSlice {
-	doc, err := goquery.NewDocument(BaseUrl + strconv.Itoa(p))
-	
+	doc, err := goquery.NewDocument(model.BaseUrl + strconv.Itoa(p))
+
 	if err != nil {
 		return nil
 	}
 
-	var hn HackerNewsSlice
+	var hn model.HackerNewsSlice
 
 	//
 	ms := "#hnmain tr td table.itemlist tbody"
 	doc.Find(ms + " tr.athing").Each(func(i int, s *goquery.Selection) {
 		ns := s.NextUntil(ms + " tr.spacer")
-		hack := HackerNews{}
-		
+		hack := model.HackerNews{}
+
 		id, _ := s.Attr("id")
 		sls := s.Find("td.title a.storylink")
 		link, _ := sls.Attr("href")
-		
 
 		hack.Id = id
 		hack.Page = p
 		hack.Sequence = i
 		hack.Link = link
-		hack.Discuss = DiscussUrl + id
+		hack.Discuss = model.DiscussUrl + id
 		hack.Title = sls.Text()
 
 		hack.Domain = s.Find("td.title span a span.sitestr").Text()

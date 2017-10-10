@@ -1,16 +1,16 @@
 package router
 
 import (
-	"io/ioutil"
-	"regexp"
 	"fmt"
 	"html/template"
+	"io/ioutil"
+	"regexp"
 	"sort"
 	"strconv"
 
 	"github.com/buaazp/fasthttprouter"
-	"github.com/valyala/fasthttp"
 	"github.com/shohi/yclite/util"
+	"github.com/valyala/fasthttp"
 )
 
 // Router is the main router
@@ -21,11 +21,11 @@ var funcMap template.FuncMap
 func init() {
 	Router.GET("/", index)
 	Router.GET("/list/*path", list)
-	funcMap = template.FuncMap { 
-		"add" : func(a, b int) int {
+	funcMap = template.FuncMap{
+		"add": func(a, b int) int {
 			return a + b
 		},
-		"equal" : func(a, b int) bool {
+		"equal": func(a, b int) bool {
 			return a == b
 		},
 	}
@@ -44,7 +44,7 @@ func list(ctx *fasthttp.RequestCtx) {
 	page := 1
 	if m, err := regexp.MatchString(`/\d+$`, path); err == nil && m {
 		tmp, e := strconv.Atoi(path[1:])
-		if e == nil && tmp > page{
+		if e == nil && tmp > page {
 			page = tmp
 		}
 	}
