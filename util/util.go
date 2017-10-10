@@ -29,7 +29,7 @@ func ExtractInts(s string) []int {
 	return ret
 }
 
-func ExtractHackerNews(p int) HackerNewsSlice {
+func ExtractHackerNews(p int) model.HackerNewsSlice {
 	doc, err := goquery.NewDocument(model.BaseUrl + strconv.Itoa(p))
 
 	if err != nil {
