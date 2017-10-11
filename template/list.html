@@ -14,7 +14,8 @@
         {{ range . }}
         <li>
             <a href="{{.Link}}" target="_new"> {{ .Title }} </a>
-            <a href="{{.Discuss}}" target="_new">{{ .Comments }}</a>
+            <a href="{{.Discuss}}" target="_new">{{ .Points }}</a>
+            <span>{{ .Comments }}</span>
         </li>
         {{ else }}
         <li> Nothing to show. </li>

@@ -36,7 +36,8 @@ func init() {
 }
 
 func index(ctx *fasthttp.RequestCtx) {
-	fmt.Fprint(ctx, "Welcome!\n")
+	info := "WelCome!\n"
+	fmt.Fprint(ctx, info)
 }
 
 func list(ctx *fasthttp.RequestCtx) {
