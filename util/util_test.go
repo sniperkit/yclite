@@ -43,8 +43,18 @@ func TestLenOnNil(t *testing.T) {
 	}
 }
 
-
 func TestExtractHackerNews(t *testing.T) {
 	p := 1
 	fmt.Println(ExtractHackerNews(p))
+}
+
+func TestParseIntRange(t *testing.T) {
+	v := "a,b"
+	_, err := ParseIntRange(v)
+	if err == nil {
+		t.Errorf("ParseIntRange(%q) should return non-nil error", err)
+	}
+
+	v = "1, 20"
+	fmt.Println(ParseIntRange(v))
 }

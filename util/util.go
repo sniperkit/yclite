@@ -1,8 +1,10 @@
 package util
 
 import (
+	"errors"
 	"regexp"
 	"strconv"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/shohi/yclite/model"
@@ -70,4 +72,36 @@ func ExtractHackerNews(p int) model.HackerNewsSlice {
 	})
 
 	return hn
+}
+
+// ParseIntRange - parse int range in format "a,b" where a and b are integer
+func ParseIntRange(v string) (bounds []int, err error) {
+	if v == "" {
+		err = errors.New("empty string")
+		return
+	}
+
+	vSlice := strings.Split(v, ",")
+	if len(vSlice) < 1 {
+		err = errors.New("No interval information")
+		return
+	}
+
+	startRange, er := strconv.ParseUint(strings.TrimSpace(vSlice[0]), 10, 32)
+	if er != nil {
+		err = er
+		return
+	}
+	bounds = append(bounds, int(startRange))
+
+	if len(vSlice) >= 2 {
+		endRange, er := strconv.ParseUint(strings.TrimSpace(vSlice[1]), 10, 32)
+		if er != nil {
+			err = er
+			return
+		}
+		bounds = append(bounds, int(endRange))
+	}
+
+	return
 }

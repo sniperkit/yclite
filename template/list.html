@@ -11,7 +11,7 @@
 
 <body>
     <ul>
-        {{ range . }}
+        {{ range .Hackers }}
         <li>
             <a href="{{.Link}}" target="_new"> {{ .Title }} </a>
             <a href="{{.Discuss}}" target="_new">{{ .Points }}</a>
@@ -21,10 +21,11 @@
         <li> Nothing to show. </li>
         {{ end }}
     </ul>
-    {{ range $index, $value := . }}
+    {{ $out := .}}
+    {{ range $index, $value := .Hackers }}
         {{ if ($index | equal 0) }}
-        <input type="button" name="prev" value="prev" onclick="location.href='/list/{{ $value.Page | add -1 }}'">
-        <input type="button" name="next" value="next" onclick="location.href='/list/{{ $value.Page | add 1 }}'"> 
+        <input type="button" name="prev" value="prev" onclick="location.href='/list/{{ $value.Page | add -1 }}?{{ $out.Filter }}'">
+        <input type="button" name="next" value="next" onclick="location.href='/list/{{ $value.Page | add 1 }}?{{ $out.Filter }}'"> 
         {{ end }}
     {{ end }}
 </body>

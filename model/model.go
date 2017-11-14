@@ -18,6 +18,7 @@ type HackerNews struct {
 	Time     string
 }
 
+// HackerNewsSlice - slice of HackerNews
 type HackerNewsSlice []HackerNews
 
 func (p HackerNewsSlice) Len() int {
@@ -30,4 +31,10 @@ func (p HackerNewsSlice) Less(i, j int) bool {
 
 func (p HackerNewsSlice) Swap(i, j int) {
 	p[i], p[j] = p[j], p[i]
+}
+
+// ContextData - context data for template
+type ContextData struct {
+	Hackers HackerNewsSlice
+	Filter  string
 }

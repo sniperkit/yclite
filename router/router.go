@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"math"
 	"regexp"
 	"sort"
 	"strconv"
 
 	"github.com/buaazp/fasthttprouter"
+	"github.com/shohi/yclite/model"
 	"github.com/shohi/yclite/util"
 	"github.com/valyala/fasthttp"
 )
@@ -36,12 +38,14 @@ func init() {
 }
 
 func index(ctx *fasthttp.RequestCtx) {
-	info := "WelCome!\n"
+	info := "Welcome!\n"
 	fmt.Fprint(ctx, info)
 }
 
+// ToDo: add filter, e.g. http://some-path/page?points=1,3
 func list(ctx *fasthttp.RequestCtx) {
 	path := ctx.UserValue("path").(string)
+
 	page := 1
 	if m, err := regexp.MatchString(`/\d+$`, path); err == nil && m {
 		tmp, e := strconv.Atoi(path[1:])
@@ -49,8 +53,34 @@ func list(ctx *fasthttp.RequestCtx) {
 			page = tmp
 		}
 	}
+
+	// sort hacker news by
 	hn := util.ExtractHackerNews(page)
 	sort.Sort(hn)
+
+	// filter result by points
+	var hackers model.HackerNewsSlice
+	filter := ctx.QueryArgs()
+	points := string(filter.Peek("points"))
+	vs, err := util.ParseIntRange(points)
+	if err == nil {
+		low, upper := math.MinInt32, math.MaxInt32
+		low = vs[0]
+		if len(vs) > 1 {
+			upper = vs[1]
+		}
+		for _, v := range hn {
+			if v.Points < low || v.Points > upper {
+				continue
+			} else {
+				hackers = append(hackers, v)
+			}
+		}
+	} else {
+		hackers = hn
+	}
+
 	ctx.Response.Header.SetContentType("text/html; charset=utf-8")
-	listTemplate.Execute(ctx, hn)
+	ctxData := model.ContextData{Hackers: hackers, Filter: filter.String()}
+	listTemplate.Execute(ctx, ctxData)
 }
