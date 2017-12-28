@@ -22,4 +22,4 @@ deps:
 
 # Cross compilation
 build-linux:  ; CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v
-docker-build: ; docker build -t yclite:0.1 .
+docker-build: ; docker build -t yclite:0.2 .

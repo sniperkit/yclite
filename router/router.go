@@ -8,6 +8,7 @@ import (
 	"regexp"
 	"sort"
 	"strconv"
+	"strings"
 
 	"github.com/buaazp/fasthttprouter"
 	"github.com/shohi/yclite/model"
@@ -58,29 +59,58 @@ func list(ctx *fasthttp.RequestCtx) {
 	hn := util.ExtractHackerNews(page)
 	sort.Sort(hn)
 
-	// filter result by points
-	var hackers model.HackerNewsSlice
-	filter := ctx.QueryArgs()
-	points := string(filter.Peek("points"))
-	vs, err := util.ParseIntRange(points)
-	if err == nil {
+	query := ctx.QueryArgs()
+
+	pointsFilterFn := func() func(model.HackerNews) bool {
+		points := string(query.Peek("points"))
+		vs, err := util.ParseIntRange(points)
+		if err != nil {
+			return func(news model.HackerNews) bool {
+				return true
+			}
+		}
 		low, upper := math.MinInt32, math.MaxInt32
 		low = vs[0]
 		if len(vs) > 1 {
 			upper = vs[1]
 		}
-		for _, v := range hn {
-			if v.Points < low || v.Points > upper {
-				continue
-			} else {
-				hackers = append(hackers, v)
+		return func(news model.HackerNews) bool {
+			return news.Points >= low && news.Points <= upper
+		}
+	}()
+
+	keywordFilterFn := func() func(model.HackerNews) bool {
+		ptn := strings.TrimSpace(string(query.Peek("filter")))
+		if ptn == "" {
+			return func(_ model.HackerNews) bool {
+				return true
 			}
 		}
-	} else {
-		hackers = hn
-	}
 
+		// ignore case
+		re, err := regexp.Compile("(?i).*" + ptn + ".*")
+		if err != nil {
+			return func(_ model.HackerNews) bool {
+				return true
+			}
+		}
+		return func(news model.HackerNews) bool {
+			return re.Match([]byte(news.Title))
+		}
+	}()
+
+	hackers := filter(filter(hn, pointsFilterFn), keywordFilterFn)
 	ctx.Response.Header.SetContentType("text/html; charset=utf-8")
-	ctxData := model.ContextData{Hackers: hackers, Filter: filter.String()}
+	ctxData := model.ContextData{Hackers: hackers, Filter: ctx.QueryArgs().String()}
 	listTemplate.Execute(ctx, ctxData)
+}
+
+func filter(hn model.HackerNewsSlice, fn func(model.HackerNews) bool) model.HackerNewsSlice {
+	var hackers model.HackerNewsSlice
+	for _, v := range hn {
+		if fn(v) {
+			hackers = append(hackers, v)
+		}
+	}
+	return hackers
 }
