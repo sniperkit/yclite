@@ -43,7 +43,8 @@ func index(ctx *fasthttp.RequestCtx) {
 	fmt.Fprint(ctx, info)
 }
 
-// ToDo: add filter, e.g. http://some-path/page?points=1,3
+// return selected hacker news based on `points` and `filter` pattern
+
 func list(ctx *fasthttp.RequestCtx) {
 	path := ctx.UserValue("path").(string)
 
@@ -61,6 +62,7 @@ func list(ctx *fasthttp.RequestCtx) {
 
 	query := ctx.QueryArgs()
 
+	// points filter, e.g. http://localhost:8080/list/1?points=100
 	pointsFilterFn := func() func(model.HackerNews) bool {
 		points := string(query.Peek("points"))
 		vs, err := util.ParseIntRange(points)
@@ -79,6 +81,7 @@ func list(ctx *fasthttp.RequestCtx) {
 		}
 	}()
 
+	// keyword filter, e.g. http://localhost:8080/list/1?filter=go
 	keywordFilterFn := func() func(model.HackerNews) bool {
 		ptn := strings.TrimSpace(string(query.Peek("filter")))
 		if ptn == "" {

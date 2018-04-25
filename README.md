@@ -5,6 +5,12 @@ hacker news lite web project using `fasthttp` and `fasthttprouter`
 
 `go get -u github.com/shohi/yclite`
 
+## usage
+
+```terminal
+http://localhost:8080/list/1?points=100&filter=go
+```
+
 ## developer
 
 The project uses `golang` team's  `dep` to resolve dependencies. First, install `dep`
