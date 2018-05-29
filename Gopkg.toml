@@ -20,3 +20,11 @@
 #  name = "github.com/x/y"
 #  version = "2.4.0"
 
+[[constraint]]
+  name = "github.com/valyala/fasthttp"
+
+[[constraint]]
+  name = "github.com/buaazp/fasthttprouter"
+
+[[constraint]]
+  name = "github.com/PuerkitoBio/goquery"
