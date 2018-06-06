@@ -7,7 +7,14 @@ hacker news lite web project using `fasthttp` and `fasthttprouter`
 
 ## usage
 
-```terminal
+```bash
+# build docker
+make docker-build
+
+# run image
+docker run -d -p 8080:8080 yclite:0.2
+
+# digest HN
 http://localhost:8080/list/1?points=100&filter=go
 ```
 
